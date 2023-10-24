@@ -27,8 +27,8 @@ struct ThoughtBankApp: App {
   var body: some Scene {
     WindowGroup {
       NavigationView {
-          LandingPageView<CentralViewModel>()
-              .environmentObject(CentralViewModel())
+          DepositedThoughtsView<PreviewViewModel>()
+              .environmentObject(PreviewViewModel())
       }
     }
   }
