@@ -12,7 +12,11 @@ struct AddThoughtsView<ViewModel: ViewModelProtocol>: View {
     
     
     var body: some View {
-        Text(viewModel.description)
+        VStack {
+            Text(viewModel.description)
+            Text("This is AddThoughtsView")
+        }
+        
     }
 }
 

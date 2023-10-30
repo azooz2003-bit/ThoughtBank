@@ -18,7 +18,11 @@ struct DepositedThoughtsView<ViewModel: ViewModelProtocol>: View {
     @EnvironmentObject var viewModel: ViewModel
     
     var body: some View {
-        Text(viewModel.description)
+        VStack {
+            Text(viewModel.description)
+            Text("This is DepositedThoughtsView")
+        }
+        
     }
 }
 
