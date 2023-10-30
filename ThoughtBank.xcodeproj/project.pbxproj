@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F1890112AEFF5170099539B /* KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1890102AEFF5170099539B /* KeyboardAdaptive.swift */; };
 		7F837F1C2AEEDE14004650ED /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F837F1B2AEEDE14004650ED /* MainView.swift */; };
 		A382322A2AE1AE6D003DB59D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A38232292AE1AE6D003DB59D /* FirebaseAnalytics */; };
 		A382322C2AE1AE6D003DB59D /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = A382322B2AE1AE6D003DB59D /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -56,6 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7F1890102AEFF5170099539B /* KeyboardAdaptive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptive.swift; sourceTree = "<group>"; };
 		7F837F1B2AEEDE14004650ED /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A38232612AE1ED2B003DB59D /* AddThoughtsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddThoughtsView.swift; sourceTree = "<group>"; };
 		A38232672AE1F067003DB59D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -116,6 +118,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F18900F2AEFF4FC0099539B /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				7F1890102AEFF5170099539B /* KeyboardAdaptive.swift */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		A3CE61CF2ADF2B9D0039EC83 = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +195,7 @@
 		FFB71ADE2ADF51060006C762 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7F18900F2AEFF4FC0099539B /* New Group */,
 				FFB71AE12ADF51140006C762 /* LandingPageView.swift */,
 				FFB71AE32ADF51140006C762 /* LoginView.swift */,
 				FFB71ADF2ADF51140006C762 /* RegistrationView.swift */,
@@ -304,6 +315,7 @@
 				FFB71AD62ADF50EA0006C762 /* User.swift in Sources */,
 				FFB71AD52ADF50EA0006C762 /* Thought.swift in Sources */,
 				FFB71AEC2ADF51150006C762 /* PersonalThoughtsView.swift in Sources */,
+				7F1890112AEFF5170099539B /* KeyboardAdaptive.swift in Sources */,
 				FFB71AE72ADF51150006C762 /* DepositedThoughtsView.swift in Sources */,
 				FFB71AD12ADF50DB0006C762 /* FirebaseManager.swift in Sources */,
 				FFB71ADB2ADF51030006C762 /* PreviewViewModel.swift in Sources */,
