@@ -28,7 +28,9 @@ class PreviewViewModel: ObservableObject, ViewModelProtocol {
     
     func login(email: String, password: String) { }
     
-    func popDepositedThought(thought: Thought) { }
+    func popDepositedThought(thought: Thought) {
+        
+    }
     
     func createThought(text: String) { }
     

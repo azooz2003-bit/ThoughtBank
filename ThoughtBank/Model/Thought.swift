@@ -24,6 +24,13 @@ struct Thought: Codable, QueryItem {
     
     // TODO: add init(), variables, functions, and decoder/encoder.
     
+    init(documentID: String, content: String, userID: String, timestamp: Date) {
+        self.documentID = documentID
+        self.content = content
+        self.userID = userID
+        self.timestamp = timestamp
+    }
+    
     func getTimeSinceUpload() -> String {
         return "0D, 0M, 0Y ago."
     }
