@@ -30,28 +30,28 @@ struct MainView<ViewModel: ViewModelProtocol>: View {
             }
             .frame(minWidth: 0, maxWidth: 350, minHeight: 0, maxHeight: 50)
             
-            TabView {
-                MainFeedView<CentralViewModel>()
+            TabView{
+                MainFeedView<PreviewViewModel>()
                     .tabItem {
                         Label("Browse", systemImage: "magnifyingglass.circle")
                     }
                 
-                DepositedThoughtsView<CentralViewModel>()
+                DepositedThoughtsView<PreviewViewModel>()
                     .tabItem {
                         Label("My Notes", systemImage: "house")
                     }
                 
-                AddThoughtsView<CentralViewModel>()
+                AddThoughtsView<PreviewViewModel>()
                     .tabItem {
                         Label("Share", systemImage: "square.and.arrow.up")
                     }
                 
-                LandingPageView<CentralViewModel>()
+                LandingPageView<PreviewViewModel>()
                     .tabItem {
                         Label("Search", systemImage: "magnifyingglass")
                     }
                 
-                SettingsView<CentralViewModel>()
+                SettingsView<PreviewViewModel>()
                     .tabItem {
                         Label("Settings", systemImage: "gearshape")
                     }
