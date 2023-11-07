@@ -95,6 +95,15 @@ final class FirebaseManager {
             - user: the user corresponding to the ongoing session, and the one who's values we want to update on the cloud.
     */
     func updateUserData(user: User) async throws {
+        let alias = user.alias
+        let ownedThoughts = user.ownedThoughts
+        let depositedThoughts = user.depositedThoughts
+        let viewedThoughts = user.viewedThoughts
+        let databaseRef = db.collection("users").document(user.documentID)
+        try await databaseRef.setData(["alias": alias,
+                                    "myThoughts": ownedThoughts,
+                                    "deposited": depositedThoughts,
+                                    "viewedThoughts": viewedThoughts])
         
         // This is a throwing function, all errors thrown by a the Firebase API function are also implicitly thrown by this function, the 'try' keyword is useful here.
         // HINT: This is an async function, to handle our Firebase server calls, could the 'await' keyword be useful.
