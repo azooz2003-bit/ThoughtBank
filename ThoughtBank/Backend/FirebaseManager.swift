@@ -37,6 +37,27 @@ final class FirebaseManager {
         
         // This is a throwing function, all errors thrown by a the Firebase API function are also implicitly thrown by this function, the 'try' keyword is useful here.
         // HINT: This is an async function, to handle our Firebase server calls, could the 'await' keyword be useful.
+        do {
+            try await auth.createUser(withEmail: email, password: password)
+        } catch {
+            print("Error creating user")
+        }
+        
+
+//        let table = db.collection("user")
+//        do {
+//            let snapshot  = try await table.getDocuments()
+//            for doc in snapshot.documents {
+//                if (doc.value(forKey: "email") as! String == email) {
+//                    print("email already exists")
+//                    break;
+//                }
+//            }
+//            try await table.addDocument(data: ["email" : email, "password" : password])
+//
+//        } catch {
+//            print("Error creating user")
+//        }
     }
     
     /**
