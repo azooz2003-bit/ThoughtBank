@@ -80,13 +80,41 @@ final class FirebaseManager {
             - data: the item we want to add to our collection, either a newly created "User", or "Thought".
     */
 
-    func add(collection: Collection, data: Codable) async throws {
-        
+    func addUser(alias: String, userID: String,email: String, ownedThoughts: [Thought], depositedThoughts: [Thought], viewedThoughts: [Thought]) async throws -> User? {
         // Step 1: Add the data, encoded, to the specified collection as a document. Firebase API throws an error if adding failed, should also cause function to throw.
         
         // This is a throwing function, all errors thrown by a the Firebase API function are also implicitly thrown by this function, the 'try' keyword is useful here.
         // HINT: This is an async function, to handle our Firebase server calls, could the 'await' keyword be useful.
+        let ref : DocumentReference = db.collection("users").document(userID)
+        try await ref.setData(["alias": alias, "myThoughts": ownedThoughts, "deposited": depositedThoughts, "viewedThoughts": viewedThoughts])
+        let addedUser = User(alias: alias, userID: ref.documentID , email: email , ownedThoughts: ownedThoughts, depositedThoughts: depositedThoughts, viewedThoughts: viewedThoughts)
+        return addedUser
+    }
+    
+//    func reviewModeration(userThought: String)  async {
+//        let apiKey = "dummy"
+//        let endpoint = "https://api.openai.com/v1/engines/davinci-codex/completions"
+//        guard let url = URL(string: endpoint) else {
+//            print("invalid URL")
+//            return
+//        }
+//        do {
+//            let (data, _) = try await URLSession.shared.data(from: url)
+//            
+//        } catch {
+//            print("Invalid data")
+//        }
+//    }
+    
+    func addThought(content: String, userID: String, timestamp: Date) async throws -> Thought? {
+ 
+        // Step 1: Add the data, encoded, to the specified collection as a document. Firebase API throws an error if adding failed, should also cause function to throw.
         
+        // This is a throwing function, all errors thrown by a the Firebase API function are also implicitly thrown by this function, the 'try' keyword is useful here.
+        // HINT: This is an async function, to handle our Firebase server calls, could the 'await' keyword be useful.
+        var ref: DocumentReference = try await db.collection("thoughts").addDocument(data:  ["userID": userID, "content": content,"timestamp": timestamp])
+        let addedThought = Thought(documentID: ref.documentID, content: content, userID:userID, timestamp:timestamp)
+        return addedThought
     }
     
     /**

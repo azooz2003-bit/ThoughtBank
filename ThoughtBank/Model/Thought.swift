@@ -26,6 +26,13 @@ struct Thought: Identifiable, Codable, QueryItem {
     var userID: String
     var timestamp: Date
     
+    init(documentID: String, content: String, userID: String, timestamp: Date) {
+        self.documentID = documentID
+        self.content = content
+        self.userID = userID
+        self.timestamp = timestamp
+    }
+    
     // TODO: add init(), variables, functions, and decoder/encoder.
     
     func getTimeSinceUpload() -> String {
