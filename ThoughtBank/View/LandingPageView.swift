@@ -23,7 +23,10 @@ struct LandingPageView<ViewModel: ViewModelProtocol>: View {
     
     var body: some View {
         
+<<<<<<< HEAD
         
+=======
+>>>>>>> main
         VStack(spacing: 90){
             Image("Logo")
                // Spacer()

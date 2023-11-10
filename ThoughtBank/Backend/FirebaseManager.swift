@@ -16,16 +16,17 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-class FirebaseManager {
-    
-    // TODO: add init(), variables, and functions.
-    
+final class FirebaseManager {
+        
     static var manager = FirebaseManager()
     
     let db = Firestore.firestore()
-    let auth = Auth.auth()
+    let auth = Auth.auth() // Statefully stores authentication status and information
     
-    
+    enum cases{
+        case User
+        case Thoughts
+    }
     /**
         - important: Use this function in the CentralViewModel to create a user using Firebase -  the CentralViewModel handles the rest.
         - parameters:
@@ -33,7 +34,12 @@ class FirebaseManager {
             - password: as entered by user
     */
 
-    func createUser(email: String, password: String) async {
+    func createUser(email: String, password: String) async throws {
+        // Step 1: Authenticate with given parameters. Throw error if unsuccessful.
+        // Step 2: Get User information from Firestore using provided result object. Object contains information such as email, documentID.
+        
+        // This is a throwing function, all errors thrown by a the Firebase API function are also implicitly thrown by this function, the 'try' keyword is useful here.
+        // HINT: This is an async function, to handle our Firebase server calls, could the 'await' keyword be useful.
     }
     
     /**
@@ -42,22 +48,41 @@ class FirebaseManager {
             - email: as entered by user
             - password: as entered by user
     */
-    func login(email: String, password: String) async {
+    func login(email: String, password: String) async throws {
+        // Step 1: Authenticate with given parameters. Throw error if unsuccessful.
+        // Step 2: Get user information from Firestore using provided result from authentication. Authentication result contains information such as email, documentID, etc.
         
+        // This is a throwing function, all errors thrown by a the Firebase API function are also implicitly thrown by this function, the 'try' keyword is useful here.
+        // HINT: This is an async function, to handle our Firebase server calls, could the 'await' keyword be useful.
     }
 
     
     /**
-        - important: Use this function in the CentralViewModel to fetch any specified collection of data.
+        - important: A general purpose fetch used to receive an array query items. In the case of our app, we will always want the query to return a list of Thoughts, or an array of size 1 containing the user with the documentID at "filterID". Use this function in the CentralViewModel to fetch the specified collection of data.
         - parameters:
             - collection: the type of collection from which we want to derive our data.
-            - filter: a closure/callback
+            - filterID: the documentID specified to filter our query to one item.
         - returns:
             - An array of either "Thought" or "User", depending on the collection specified.
     */
 
-    func fetch(collection: Collection, filterID: (String) -> Bool) async throws -> [QueryItem] {
+    func fetch(collection: Collection, filterID: String?) async throws -> [QueryItem] {
+        // Step 1: Await the fetch via Firebase. Make a fetch query that gets documents that match this filter.
+        do {
+                   // Step 1: Await the fetch via Firebase. Make a fetch query that gets documents that match this filter.
+                   var query: Query
+                   switch collection {
+                   case .thoughts:
+                       query = db.collection("thoughts")
+                   case .users:
+                       query = db.collection("users")
+                   }
+                   
+        // Step 2: Map the data to objects using the fetched documents.
         return []
+        
+        // This is a throwing function, all errors thrown by a the Firebase API function are also implicitly thrown by this function, the 'try' keyword is useful here.
+        // HINT: This is an async function, to handle our Firebase server calls, could the 'await' keyword be useful.
     }
     
     /**
@@ -68,6 +93,12 @@ class FirebaseManager {
     */
 
     func add(collection: Collection, data: Codable) async throws {
+        
+        // Step 1: Add the data, encoded, to the specified collection as a document. Firebase API throws an error if adding failed, should also cause function to throw.
+        
+        // This is a throwing function, all errors thrown by a the Firebase API function are also implicitly thrown by this function, the 'try' keyword is useful here.
+        // HINT: This is an async function, to handle our Firebase server calls, could the 'await' keyword be useful.
+        
     }
     
     /**
@@ -77,6 +108,8 @@ class FirebaseManager {
     */
     func updateUserData(user: User) async throws {
         
+        // This is a throwing function, all errors thrown by a the Firebase API function are also implicitly thrown by this function, the 'try' keyword is useful here.
+        // HINT: This is an async function, to handle our Firebase server calls, could the 'await' keyword be useful.
     }
     
     

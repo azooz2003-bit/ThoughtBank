@@ -7,7 +7,7 @@
 	<key>GCM_SENDER_ID</key>
 	<string>1043432359772</string>
 	<key>PLIST_VERSION</key>
-	<string>1</string>
+	<string></string>
 	<key>BUNDLE_ID</key>
 	<string>co.aalbahar.ThoughtBank</string>
 	<key>PROJECT_ID</key>
@@ -26,5 +26,9 @@
 	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:1043432359772:ios:dd90935c4b8a42ce75e399</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SmoochSans-SemiBold.ttf</string>
+	</array>
 </dict>
 </plist>
