@@ -22,11 +22,7 @@ final class FirebaseManager {
     
     let db = Firestore.firestore()
     let auth = Auth.auth() // Statefully stores authentication status and information
-    
-    enum cases{
-        case User
-        case Thoughts
-    }
+
     /**
         - important: Use this function in the CentralViewModel to create a user using Firebase -  the CentralViewModel handles the rest.
         - parameters:
@@ -68,16 +64,33 @@ final class FirebaseManager {
 
     func fetch(collection: Collection, filterID: String?) async throws -> [QueryItem] {
         // Step 1: Await the fetch via Firebase. Make a fetch query that gets documents that match this filter.
-        do {
-                   // Step 1: Await the fetch via Firebase. Make a fetch query that gets documents that match this filter.
-                   var query: Query
-                   switch collection {
-                   case .thoughts:
-                       query = db.collection("thoughts")
-                   case .users:
-                       query = db.collection("users")
-                   }
-                   
+            // Step 1: Await the fetch via Firebase. Make a fetch query that gets documents that match this filter.
+        var query: Query
+        var items: [QueryItem] = []
+
+        switch collection {
+        case .thoughts:
+            query = db.collection("thoughts")
+            
+            var docs: QuerySnapshot = try await query.getDocuments()
+            for doc in docs.documents{
+                let data = doc.data()
+                let id = doc.documentID
+                let content: String = data["content"] as? String ?? "empty"
+                let userID: String = data["userID"] as? String ?? "noID"
+                let timeStamp: Date = data["timestamp"] as? Date ?? Date()
+
+                items.append(Thought(documentID: id, content: content, userID: userID, timestamp: timeStamp))
+            }
+            return items
+        case .users:
+            query = db.collection("users")
+            
+            return []
+        }
+            
+            
+        
         // Step 2: Map the data to objects using the fetched documents.
         return []
         
