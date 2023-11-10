@@ -11,12 +11,32 @@ struct TestingView<ViewModel: ViewModelProtocol>: View {
     @EnvironmentObject var vm: ViewModel
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        VStack {
+            Text("Hello, World!")
+            
+            Button("Test", action: {
+                
+               addUserTest()
+               
+            })
+        }
+        
+        
+        
+    }
+    
+    
+    
+    func addUserTest() {
+        Task {
+            try await FirebaseManager.manager.addUser(alias: "testAlias", userID: "fjkrehjgkue", email: "tuan@gmail.com", ownedThoughts: [], depositedThoughts: [], viewedThoughts: [])
+        }
     }
 }
 
 struct TestingView_Previews: PreviewProvider {
     static var previews: some View {
-        TestingView<PreviewViewModel>().environmentObject(PreviewViewModel())
+        TestingView<PreviewViewModel>().environmentObject(CentralViewModel())
     }
 }

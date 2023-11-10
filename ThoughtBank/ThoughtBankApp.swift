@@ -27,8 +27,11 @@ struct ThoughtBankApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
+                /*
                 LandingPageView<CentralViewModel>()
-                    .environmentObject(CentralViewModel())
+                    .environmentObject(CentralViewModel())*/
+                
+                TestingView<CentralViewModel>().environmentObject(CentralViewModel())
             }
         }
     }
