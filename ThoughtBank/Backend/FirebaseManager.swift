@@ -91,20 +91,77 @@ final class FirebaseManager {
         return addedUser
     }
     
-//    func reviewModeration(userThought: String)  async {
-//        let apiKey = "dummy"
-//        let endpoint = "https://api.openai.com/v1/engines/davinci-codex/completions"
-//        guard let url = URL(string: endpoint) else {
-//            print("invalid URL")
-//            return
-//        }
-//        do {
-//            let (data, _) = try await URLSession.shared.data(from: url)
-//            
-//        } catch {
-//            print("Invalid data")
-//        }
-//    }
+    func reviewModeration(userThought: String) async {
+        // Static info
+        // connect to OpenAI
+        let apiKey = "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"
+        // specify which API service to use which is completions
+        let endpoint = "https://api.openai.com/v1/completions"
+        // Ask GPT to review the user input
+        let parameters: [String: Any] = [
+            "model": "gpt-3.5-turbo-instruct",
+             "prompt": "Does the user input '\(userThought)' violate community guidelines related to topics such as sex, suicide, hate speech, harassment, explicit or adult content, violence or gore, and inappropriate language? Please respond with a 'Yes' or 'No'. Your answer should consist of only one word.",
+             "max_tokens": 7,
+             "temperature": 0
+         ]
+        
+//        URL is optional because there will be case it could be a wrong URL
+        guard let url = URL(string: endpoint) else {
+            print("Invalid URL!")
+            return
+        }
+        
+        
+//        create a POST request with specified header
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        
+//        specify the request body
+        do {
+//            serialize body from NSDictionnary (foundation object) to JSON object
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+        } catch {
+            print("Error occured: \(error)")
+            return
+        }
+        
+        do {
+//            Actually make the request
+            let (data, _) = try await URLSession.shared.data(for: request) //type: Data
+            
+//           Serialize data returned from the POST request to
+            let json = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any] //type: Dictionary<String, Any>
+            // Optional<Any>
+            
+//            guard let decision = json["choices"] else {
+//                print("Empty response from OpenAI!")
+//                return
+//            } // type: __NSSingleObjectArrayI
+
+            if let decisionArr = json["choices"] as? [[String:Any]],
+               let decision = decisionArr.first {
+                if let text = decision["text"] as? String {
+                    let trimmedString = text.trimmingCharacters(in: .whitespacesAndNewlines)
+                    switch trimmedString {
+                    case "Yes":
+                        print("Your message has been flagged for a potential violation of our community guidelines. Kindly take a moment to review our guidelines to ensure that your contributions align with our community standards. Thank you for your cooperation.")
+                    case "No":
+                        print("Your input aligns with our community guidelines. Thank you for adhering to our standards!")
+                    default:
+                        print("Try again!")
+                    }
+                } else {
+                    print("Unable to retrieve the review!")
+                }
+            }
+        } catch {
+            print("Error occured: \(error)")
+        }
+        
+    }
     
     func addThought(content: String, userID: String, timestamp: Date) async throws -> Thought? {
  

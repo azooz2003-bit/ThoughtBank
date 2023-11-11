@@ -13,7 +13,7 @@ struct TestingView<ViewModel: ViewModelProtocol>: View {
     var body: some View {
         
         VStack {
-            Text("Hello, World!")
+            Text("Test review Moderation hihi")
             
             Button("Test", action: {
                 
@@ -30,7 +30,7 @@ struct TestingView<ViewModel: ViewModelProtocol>: View {
     
     func addUserTest() {
         Task {
-            try await FirebaseManager.manager.addUser(alias: "testAlias", userID: "fjkrehjgkue", email: "tuan@gmail.com", ownedThoughts: [], depositedThoughts: [], viewedThoughts: [])
+             await FirebaseManager.manager.reviewModeration(userThought: "you should be burned in hell")
         }
     }
 }

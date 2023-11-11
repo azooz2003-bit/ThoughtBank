@@ -213,5 +213,7 @@
 		<string>SmoochSans-Regular.ttf</string>
 		<string>SmoochSans-SemiBold.ttf</string>
 	</array>
+	<key>MyAPIKey</key>
+	<string></string>
 </dict>
 </plist>
