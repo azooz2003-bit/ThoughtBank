@@ -85,14 +85,24 @@ final class FirebaseManager {
             return items
         case .users:
             query = db.collection("users")
-            
+            var docs: QuerySnapshot = try await query.getDocuments()
+            for doc in docs.documents{
+                let data = doc.data()
+                let id = doc.documentID
+                let alias: String = data["alias"] as? String ?? "empty"
+                let userID: String = data["userID"] as? String ?? "noID"
+                let email: String = data["email"] as? String ?? "empty"
+                let ownedThoughts: [Thought]
+                let oThoughts: [String] = doc["myThoughts"] as? [String] ?? []
+               // items.append(Users(documentID: id, content: content, userID: userID, timestamp: timeStamp))
+            }
             return []
         }
             
             
         
         // Step 2: Map the data to objects using the fetched documents.
-        return []
+        
         
         // This is a throwing function, all errors thrown by a the Firebase API function are also implicitly thrown by this function, the 'try' keyword is useful here.
         // HINT: This is an async function, to handle our Firebase server calls, could the 'await' keyword be useful.
