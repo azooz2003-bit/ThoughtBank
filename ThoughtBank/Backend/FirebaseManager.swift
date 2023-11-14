@@ -84,17 +84,39 @@ final class FirebaseManager {
             }
             return items
         case .users:
-            query = db.collection("users")
-            var docs: QuerySnapshot = try await query.getDocuments()
-            for doc in docs.documents{
-                let data = doc.data()
-                let id = doc.documentID
-                let alias: String = data["alias"] as? String ?? "empty"
-                let userID: String = data["userID"] as? String ?? "noID"
-                let email: String = data["email"] as? String ?? "empty"
-                let ownedThoughts: [Thought]
-                let oThoughts: [String] = doc["myThoughts"] as? [String] ?? []
-               // items.append(Users(documentID: id, content: content, userID: userID, timestamp: timeStamp))
+            let doc = try await db.collection("users").document(filterID!).getDocument()
+            let alias: String = doc["alias"] as? String ?? "empty"
+                let userID: String = doc["userID"] as? String ?? "noID"
+                let email: String = doc["email"] as? String ?? "empty"
+                var ownedThoughts: [Thought] = []
+                let ownedThoughtsID: [String] = doc["myThoughts"] as? [String] ?? []
+                for id in ownedThoughtsID {
+                    let ref = try await db.collection("thoughts").document(id).getDocument()
+                    let content: String = ref["content"] as? String ?? "empty"
+                    let userID: String = ref["userID"] as? String ?? "noID"
+                    let timeStamp: Date = ref["timestamp"] as? Date ?? Date()
+                    ownedThoughts.append(Thought(documentID: id, content: content, userID: userID, timestamp: timeStamp))
+                }
+                var depositedThoughts: [Thought] = []
+                let depositedThoughtsID: [String] = doc["depositedThoughts"] as? [String] ?? []
+                for id in depositedThoughtsID {
+                    let ref = try await db.collection("thoughts").document(id).getDocument()
+                    let content: String = ref["content"] as? String ?? "empty"
+                    let userID: String = ref["userID"] as? String ?? "noID"
+                    let timeStamp: Date = ref["timestamp"] as? Date ?? Date()
+                    depositedThoughts.append(Thought(documentID: id, content: content, userID: userID, timestamp: timeStamp))
+                }
+                var viewedThoughts: [Thought] = []
+                let viewedThoughtsID: [String] = doc["viewedThoughts"] as? [String] ?? []
+                for id in viewedThoughtsID {
+                    let ref = try await db.collection("thoughts").document(id).getDocument()
+                    let content: String = ref["content"] as? String ?? "empty"
+                    let userID: String = ref["userID"] as? String ?? "noID"
+                    let timeStamp: Date = ref["timestamp"] as? Date ?? Date()
+                    viewedThoughts.append(Thought(documentID: id, content: content, userID: userID, timestamp: timeStamp))
+                }
+               items.append(User(alias: alias, userID: userID, email: email, ownedThoughts: ownedThoughts, depositedThoughts: depositedThoughts, viewedThoughts: viewedThoughts))
+                return items
             }
             return []
         }
