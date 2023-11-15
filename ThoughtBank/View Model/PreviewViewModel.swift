@@ -21,11 +21,7 @@ import Foundation
 class PreviewViewModel: ObservableObject, ViewModelProtocol {
     var description: String = "PreviewViewModel"
     
-    @Published var navigationState: NavigationState = .landing {
-        didSet {
-            
-        }
-    }
+    @Published var navigationState: NavigationState = .landing
     
     @Published var user: User?
     @Published var currentFeedThought: Thought?
@@ -43,7 +39,7 @@ class PreviewViewModel: ObservableObject, ViewModelProtocol {
     ]
     
     func createUser(email: String, password: String) {
-        navigationState = .main
+        navigationState = .feedThoughts
         currentFeedThought = feedThoughts[0]
         user = User(alias: "NewUser01", userID: "abc123", email: "newuser@example.com", ownedThoughts: [
             
@@ -55,7 +51,7 @@ class PreviewViewModel: ObservableObject, ViewModelProtocol {
     }
     
     func login(email: String, password: String) {
-        navigationState = .main
+        navigationState = .feedThoughts
         currentFeedThought = feedThoughts[0]
         user = User(alias: "ExistingUser03", userID: "def456", email: "existinguser@example.com", ownedThoughts: [
             Thought(documentID: "f", content: "Thinking is hard", userID: "def456", timestamp: Date()),

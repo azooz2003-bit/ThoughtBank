@@ -40,6 +40,7 @@ struct MainFeedView<ViewModel: ViewModelProtocol>: View {
                         // TODO: Implement "Reject" button
                         // - If the user is rejecting, what's the sole action we need to take?
                         print("Call viewModel to go to the next thought")
+                        viewModel.goToNextFeedThought()
                     })
                     Spacer()
                     RoundedButton(text: "Deposit", image: "checkmark", size: 16, action: {
@@ -48,6 +49,7 @@ struct MainFeedView<ViewModel: ViewModelProtocol>: View {
                         //   is saved in User's deposited thoughts
                         // - We also need to show the next card
                         print("Call viewModel to deposit the current thought and go to the next thought")
+                        viewModel.depositThought(thought: viewModel.feedThoughts[viewModel.feedThoughtIndex])
                     })
                     Spacer()
                 }

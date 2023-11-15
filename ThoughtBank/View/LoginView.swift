@@ -38,6 +38,7 @@ struct LoginView<ViewModel: ViewModelProtocol>: View {
                 LargeFilledButton(text: "Sign in", color: .pink, action: {
                     // TODO: Implement "Sign in" button
                     // - Must call viewModel (should be a straightforward call)
+                    viewModel.login(email: email, password: password)
                 })
                 
                 Spacer()

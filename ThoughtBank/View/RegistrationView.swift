@@ -38,6 +38,7 @@ struct RegistrationView<ViewModel: ViewModelProtocol>: View {
                 LargeFilledButton(text: "Register", color: .pink, action: {
                     // TODO: Implement "Register" button
                     // - Must call viewModel (should be a straightforward call)
+                    viewModel.createUser(email: email, password: password)
                 })
                 
                 Spacer()

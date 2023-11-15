@@ -22,7 +22,7 @@ struct PersonalThoughtsView<ViewModel: ViewModelProtocol>: View {
             if shouldShowAddThoughtsView {
                 viewModel.navigationState = .add
             } else {
-                viewModel.navigationState = .main
+                viewModel.navigationState = .ownedThoughts
             }
         }
     }
@@ -53,6 +53,7 @@ struct PersonalThoughtsView<ViewModel: ViewModelProtocol>: View {
                     RoundedButton(text: "Back", image: "chevron.left", size: 12, action: {
                         // TODO: Implement "Back" button for owned thoughts
                         print("Go to previous thought created by user")
+                        viewModel.goToPreviousOwnedThought()
                     })
                     Spacer()
                     RoundedButton(text: "Add Thought", image: "plus", size: 30, action: {
@@ -65,6 +66,7 @@ struct PersonalThoughtsView<ViewModel: ViewModelProtocol>: View {
                     RoundedButton(text: "Next", image: "chevron.right", size: 12, action: {
                         // TODO: Implement "Next" button for owned thoughts
                         print("Go to next thought created by user")
+                        viewModel.goToNextOwnedThought()
                     })
                 }
                 .padding(EdgeInsets(top: 0, leading: 32, bottom: 48, trailing: 32))
