@@ -20,6 +20,9 @@ import Foundation
 import UIKit
 
 class CentralViewModel: ObservableObject, ViewModelProtocol {
+    
+    
+    
     var description: String = "CentralViewModel"
     
     let firebase: FirebaseManager = .manager
@@ -53,6 +56,14 @@ class CentralViewModel: ObservableObject, ViewModelProtocol {
         - password: the password of the user
      **/
     func createUser(email: String, password: String) {
+        shouldLoadBlocking = true
+        Task {
+            let fetcheduser = try await firebase.createUser(email: email, password: password)
+            await MainActor.run {
+                user = fetcheduser
+            }
+            }
+        shouldLoadBlocking = false
         
     }
     
@@ -68,7 +79,14 @@ class CentralViewModel: ObservableObject, ViewModelProtocol {
         - password: the password of the user
      **/
     func login(email: String, password: String) {
-        
+        shouldLoadBlocking = true
+        Task{
+            let fetchedUser = try await firebase.login(email: email, password: password)
+            await MainActor.run {
+                user = fetchedUser
+                shouldLoadBlocking = false
+            }
+        }
     }
     
     /**
