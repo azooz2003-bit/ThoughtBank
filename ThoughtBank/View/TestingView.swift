@@ -30,7 +30,7 @@ struct TestingView<ViewModel: ViewModelProtocol>: View {
     
     func addUserTest() {
         Task {
-             await FirebaseManager.manager.reviewModeration(userThought: "you should be burned in hell")
+             await FirebaseManager.manager.reviewModeration(userThought: "I love you and your dog")
         }
     }
 }

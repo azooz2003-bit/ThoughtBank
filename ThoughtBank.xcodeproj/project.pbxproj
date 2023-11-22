@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3578FC9B2B043268002DA0A1 /* AddThoughtResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3578FC9A2B043268002DA0A1 /* AddThoughtResponse.swift */; };
 		3D5E89272AEF137D00C74079 /* KeyboardAdaptive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E89262AEF137D00C74079 /* KeyboardAdaptive.swift */; };
 		7F1890132AEFF99E0099539B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1890122AEFF99E0099539B /* MainView.swift */; };
 		A31484532AF4604A00A81A4A /* TestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31484522AF4604A00A81A4A /* TestingView.swift */; };
@@ -61,6 +62,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3578FC9A2B043268002DA0A1 /* AddThoughtResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddThoughtResponse.swift; sourceTree = "<group>"; };
 		3D5E89262AEF137D00C74079 /* KeyboardAdaptive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAdaptive.swift; sourceTree = "<group>"; };
 		7F1890122AEFF99E0099539B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A31484522AF4604A00A81A4A /* TestingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingView.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			children = (
 				FFB71AD32ADF50EA0006C762 /* Thought.swift */,
 				FFB71AD42ADF50EA0006C762 /* User.swift */,
+				3578FC9A2B043268002DA0A1 /* AddThoughtResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				3D5E89272AEF137D00C74079 /* KeyboardAdaptive.swift in Sources */,
 				FFB71AD62ADF50EA0006C762 /* User.swift in Sources */,
 				FFB71AD52ADF50EA0006C762 /* Thought.swift in Sources */,
+				3578FC9B2B043268002DA0A1 /* AddThoughtResponse.swift in Sources */,
 				FFB71AEC2ADF51150006C762 /* PersonalThoughtsView.swift in Sources */,
 				FFB71AE72ADF51150006C762 /* DepositedThoughtsView.swift in Sources */,
 				A31484532AF4604A00A81A4A /* TestingView.swift in Sources */,

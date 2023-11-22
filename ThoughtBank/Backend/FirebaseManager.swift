@@ -125,7 +125,7 @@ final class FirebaseManager {
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
         } catch {
             print("Error occured: \(error)")
-            return
+            
         }
         
         do {
@@ -163,7 +163,7 @@ final class FirebaseManager {
         
     }
     
-    func addThought(content: String, userID: String, timestamp: Date) async throws -> Thought? {
+    func addThought(content: String, userID: String, timestamp: Date) async throws /*-> AddThoughtResponse*/ {
  
         // Step 1: Add the data, encoded, to the specified collection as a document. Firebase API throws an error if adding failed, should also cause function to throw.
         
@@ -171,7 +171,7 @@ final class FirebaseManager {
         // HINT: This is an async function, to handle our Firebase server calls, could the 'await' keyword be useful.
         var ref: DocumentReference = try await db.collection("thoughts").addDocument(data:  ["userID": userID, "content": content,"timestamp": timestamp])
         let addedThought = Thought(documentID: ref.documentID, content: content, userID:userID, timestamp:timestamp)
-        return addedThought
+//        return AddThoughtResponse(isValid: true, thought: "Message", message: addedThought)
     }
     
     /**
