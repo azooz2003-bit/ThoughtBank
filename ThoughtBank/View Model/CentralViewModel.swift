@@ -134,7 +134,9 @@ class CentralViewModel: ObservableObject, ViewModelProtocol {
      
      **/
     func goToNextFeedThought() {
-        
+        if (feedThoughtIndex < feedThoughts.count) {
+            feedThoughtIndex += 1
+        }
     }
     
     /**
