@@ -82,6 +82,38 @@ class CentralViewModel: ObservableObject, ViewModelProtocol {
         - thought: a struct object representing all the information about the thought we want to remove
      **/
     func popDepositedThought(thought: Thought?) {
+        guard let user = user else {
+            return
+        }
+        shouldLoadBlocking = true
+        Task {
+            do {
+                guard let unwrappedThought = thought else {
+                    print("Error: Thought is empty")
+                    shouldLoadBlocking = false
+                    return
+                }
+                // POP DEPOSITED THOUGHT TO THE ONLINE DB
+                // create a deep copy + deposit thought to the copy and post
+                let duplicate = user.duplicate()
+                if (duplicate.depositedThoughts.count != 0) {
+                    duplicate.popDepositedThought(thought: unwrappedThought)
+                    try await firebase.updateUserData(user: duplicate)
+                    
+                    // POP DEPOSITED THOUGHT LOCALLY
+                    await MainActor.run(body: {
+                        user.popDepositedThought(thought: unwrappedThought)
+                        shouldLoadBlocking = false
+                    })
+                } else {
+                    print("Error: Deposited Thought Arr is empty")
+                    return
+                }
+                
+            } catch {
+                print("Error depositing thought: \(error)")
+            }
+        }
         
     }
     
